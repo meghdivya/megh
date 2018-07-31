@@ -4,7 +4,7 @@ using namespace std;
 #include<stdlib.h>
 #include<stdio.h>
 #include<queue>
-int hash[100];
+int hashtable[100];
  
  
 using namespace std;
@@ -36,7 +36,7 @@ void Vsum(tree* t,int col)
 if(!t)
  return;
 Vsum(t->left,col-1);
-hash[col]+=t->data;
+hashtable[col]+=t->data;
 Vsum(t->right, col+1);
  
  
@@ -110,10 +110,7 @@ int tree::max_path_length(tree* t, int max_path_l)
         if(lefth + righth > max_path_l)
             max_path_l = lefth + righth;
 
-        if(lefth>righth)
-         return lefth+1;
-        else
-         return righth+1;
+        return max(lefth,righth)+1;
     }
 }
  
@@ -279,7 +276,7 @@ int main()
     {
      if(i>20)
      break;
-     cout<<"hash->"<<hash[i]<<"\n";
+     cout<<"hashtable->"<<hashtable[i]<<"\n";
      i++;
     }
 #endif
