@@ -41,10 +41,11 @@ int main()
     {
         cout<<"Enter n for magic number, -1 to exit\n";
         cin >> i;
-        if(i == -1)
+        if(i == -100)
             return 0;
-        cout << "Magic number is " << nthMagicNo(i)<< endl;
-        bin(nthMagicNo(i));
+        //cout << "Magic number is " << nthMagicNo(i)<< endl;
+        //bin(nthMagicNo(i));
+        bin(i);
         cout<<endl;
 
     }
