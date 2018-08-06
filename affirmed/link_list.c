@@ -70,7 +70,7 @@ int main()
 	int i;
 	while(1)
 	{
-		printf("Enter 1 to add, 2 to display, 3 to Exit\n");
+		printf("Enter 1 to add, 2 to display, 3 to Exit, 4 to free\n");
 		scanf("%d",&i);
 		switch(i)
 		{
@@ -89,6 +89,24 @@ int main()
 				printf("Exiting\n");
 				return 0;
 			}break;
+			case 4:
+			{
+					link_list_t* nPtr,*sPtr;
+                    nPtr = headp;
+                    if(!headp)
+                        printf("headp is NULL\n");
+                    else
+                        printf("headp is not NULL\n");
+                    while(nPtr!=NULL)
+                        printf("going to delete\n");
+                        printf("Deleting [Data->%d]\n", nPtr->data);
+                        sPtr = nPtr->next;
+                        free(nPtr);
+                        nPtr = sPtr;
+					//for(nPtr = sPtr; nPtr; nPtr=nPtr->next)
+					//		free(nPtr);
+
+			}
 		}
 		i = 0;
 	}

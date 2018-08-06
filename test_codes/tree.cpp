@@ -2,25 +2,30 @@
 using namespace std;
 //#include<malloc.h>
 #include<stdlib.h>
-#include<stdio.h>
 #include<queue>
+
 int hashtable[100];
+#define COUNT 10
  
  
 using namespace std;
  
-typedef class tree
+template <typename T>
+class tree
 {
-    public:
-    int data;
+    private:
      tree* left;
      tree* right;
      tree* parent;
      static tree* root;
+    public:
+     T data;
      tree();
-     virtual void addNode(tree* t,int data);
-     static tree* createTree(int data);
+     virtual void addNode(tree* t,T data);
+     static tree* createTree(T data);
      tree* newNode();
+     void print2D(tree* t);
+     void print2DUtil(tree* t, int space);
      void inorder(tree* t);
      void levelorder(tree* t);
      int heightOfTreeR(tree* t);
@@ -28,28 +33,58 @@ typedef class tree
      int countLeavesR(tree* t);
      int max_path_length(tree* t, int max_path_l);
      int max_path_l;
-}tree;
+     void print_right_view(tree* t);
+};
  
- 
-void Vsum(tree* t,int col)
+// Function to print binary tree in 2D
+// It does reverse inorder traversal
+template <typename T>
+void tree<T>::print2DUtil(tree *root, int space)
 {
-if(!t)
- return;
-Vsum(t->left,col-1);
-hashtable[col]+=t->data;
-Vsum(t->right, col+1);
+    // Base case
+    if (root == NULL)
+        return;
  
+    // Increase distance between levels
+    space += COUNT;
  
+    // Process right child first
+    print2DUtil(root->right, space);
+ 
+    // Print current node after space
+    // count
+    cout<<"\n";
+    for (int i = COUNT; i < space; i++)
+        cout<<" ";
+    cout<<root->data<<"\n";
+ 
+    // Process left child
+    print2DUtil(root->left, space);
+    //root->print2DUtil(root->left, space);
 }
-typedef queue<tree*> Qtree;
  
- tree::tree()
+// Wrapper over print2DUtil()
+template <typename T>
+void tree<T>::print2D(tree* root)
+{
+   // Pass initial space count as 0
+   print2DUtil(root, 0);
+}
+ 
+#if 0
+template <typename T>
+queue<tree<T>*> Qtree;
+#endif
+ 
+template <typename T>
+ tree<T>::tree()
 {
     max_path_l = -1;
  
 }
  
-int tree::countNodesR(tree* t)
+template <typename T>
+int tree<T>::countNodesR(tree* t)
 {
  
     if(!t)
@@ -62,7 +97,8 @@ int tree::countNodesR(tree* t)
     }
 }
  
-int tree::countLeavesR(tree* t)
+template <typename T>
+int tree<T>::countLeavesR(tree* t)
 {
  
     if(!t)
@@ -82,7 +118,8 @@ int max(int a,int b)
     return a>b?a:b;
 }
  
-int tree::heightOfTreeR(tree* t)
+template <typename T>
+int tree<T>::heightOfTreeR(tree* t)
 {
     if(!t)
     {
@@ -99,7 +136,8 @@ int tree::heightOfTreeR(tree* t)
     }
 }
 
-int tree::max_path_length(tree* t, int max_path_l)
+template <typename T>
+int tree<T>::max_path_length(tree* t, int max_path_l)
 {
     if(!t)
         return 0;
@@ -115,19 +153,22 @@ int tree::max_path_length(tree* t, int max_path_l)
 }
  
  
-void tree::inorder(tree* root)
+template <typename T>
+void tree<T>::inorder(tree* root)
 {
  
     if(root)
     {
         inorder(root->left);
-      cout<<"data="<<root->data<<"\n";
+        cout<<"data="<<root->data<<"\n";
         inorder(root->right);
     }
 }
  
-void tree::levelorder(tree* root)
+template <typename T>
+void tree<T>::levelorder(tree* root)
 {
+#if 0
  
     if(!root)
     {
@@ -156,10 +197,12 @@ void tree::levelorder(tree* root)
         }
         //qt.clear();
     }
+#endif
 }
 
  
-tree* tree::createTree(int data)
+template <typename T>
+tree<T>* tree<T>::createTree(T data)
 {
     tree* t=new tree;
     t->left=t->right=t->parent=NULL;
@@ -167,7 +210,8 @@ tree* tree::createTree(int data)
     return t;
 }
  
-tree* tree::newNode()
+template <typename T>
+tree<T>* tree<T>::newNode()
 {
     tree* t=new tree;
     t->left=t->right=t->parent=NULL;
@@ -176,8 +220,10 @@ tree* tree::newNode()
  
 }
  
-void tree::addNode(tree* t,int data)
+template <typename T>
+void tree<T>::addNode(tree* t,T data)
 {
+#if 0
     Qtree qt;
     if(!t)
     {
@@ -223,35 +269,35 @@ void tree::addNode(tree* t,int data)
  
         }
     }
+#endif
 }
  
 int main()
 {
     int i = 0;
+    tree<int>* root = tree<int>::createTree(100);
+    cout<<"Tree Created with Root="<<root->data<<"\n";
 #if 0
     tree *root;
-    while(1)
-    {
-        cout<<"Enter 1 to add Node, 2 for inorder print, 3 for levelorder print\n\
-            4 for count-nodes, 5 for count-leaves, 6 for height of tree\n";
-        cin >> i;
-        switch(i)
-        {
-            case 1:
-                tree::addNode(i);
-                break;
-            case 2:
-                tree::inorder();
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
-    }
-#endif
-    tree* root = tree::createTree(100);
-    cout<<"Tree Created with Root="<<root->data<<"\n";
+//    while(1)
+//    {
+//        cout<<"Enter 1 to add Node, 2 for inorder print, 3 for levelorder print\n\
+//            4 for count-nodes, 5 for count-leaves, 6 for height of tree\n";
+//        cin >> i;
+//        switch(i)
+//        {
+//            case 1:
+//                tree::addNode(i);
+//                break;
+//            case 2:
+//                tree::inorder();
+//                break;
+//            case 3:
+//                break;
+//            case 4:
+//                break;
+//        }
+//    }
  
     root->addNode(root,50);
     cout<<"No of Nodes="<<root->countNodesR(root)<<"\n";
@@ -262,6 +308,7 @@ int main()
     root->addNode(root,10);
     root->addNode(root,5);
     root->addNode(root,2);
+    root->print2D(root);
     cout<<"Output of Inorder Recursive"<<"\n";
     root->inorder(root);
     root->levelorder(root);
@@ -269,16 +316,7 @@ int main()
  
     cout<<"No of Leaf Nodes="<<root->countLeavesR(root)<<"\n";
     cout<<"Height of Tree="<<root->heightOfTreeR(root)<<"\n";
-   cout<<"Max-Path-Length="<<root->max_path_length(root, root->max_path_l)<<"\n";
-   Vsum(root,0);
-#if 0
-    while(1)
-    {
-     if(i>20)
-     break;
-     cout<<"hashtable->"<<hashtable[i]<<"\n";
-     i++;
-    }
+    cout<<"Max-Path-Length="<<root->max_path_length(root, root->max_path_l)<<"\n";
 #endif
     return 0;
 }
