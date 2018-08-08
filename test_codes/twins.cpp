@@ -62,6 +62,7 @@ vector<string> twins(const vector<string>& a, const vector<string>& b) {
         string encode_a="", encode_b="";
         ostringstream convert;   // stream used for the conversion
         string result_odd,result_even;
+        //Can do to_string if C++11 is there
         for(;i<MAX_CHAR;i++)
         {
             convert.str("");
