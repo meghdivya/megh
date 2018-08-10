@@ -3,6 +3,7 @@
 #include<vector>
 #include<cmath>
 #include<queue>
+#include<algorithm>
 using namespace std;
 
 struct mystruct{
@@ -85,6 +86,28 @@ int main()
     vector<pair<int, int> > v = min_distance(10, loc, 5);
     for(int i=0; i<v.size(); i++)
         cout << v[i].first << ", " << v[i].second << endl;
+
+    vector<int> vect{3,2,1,4,65,58,38};
+    for(int x: vect)
+        cout<<x<<endl;
+    sort(vect.begin(), vect.end());
+    for(int x: vect)
+        cout<<x<<endl;
+//
+//    vector<pair<int, int> > vect{{1,3},{2,4},{1,5}};
+//    for(int x: vect)
+//        cout<<x<<endl;
+//    sort(vect.begin(), vect.end());
+//    for(int x: vect)
+//        cout<<x<<endl;
+    if(binary_search(vect.begin(), vect.end(), 38))
+        cout<<"Found\n"<<endl;
+    if(!binary_search(vect.begin(), vect.end(), 39))
+        cout<<"not Found\n"<<endl;
+
+    make_heap(vect.begin(), vect.end());
+    for(int x: vect)
+        cout<<x<<endl;
 
     return 0;
 }
