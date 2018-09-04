@@ -34,6 +34,55 @@ void add_number_to_list(link_list_t** head,  int data)
 	return;
 }
 
+void remove_nth_node(link_list_t* head, int n)
+{
+    link_list_t* tmp = head, *tmp1 = NULL;
+    int i = 0;
+    if(n==0)
+        return;
+    else
+    {
+        while(tmp)
+        {
+            i++;
+            if(i == n)
+            {
+                if(i==1)
+                {
+                    tmp1 = tmp->next;
+                    free(tmp);
+                    head = tmp1;
+                    tmp = head;
+                    break;
+
+                }
+                else
+                {
+                    tmp1->next = tmp->next; 
+                    free(tmp);
+                    tmp = tmp1;
+                    break;
+                }
+            }
+            tmp1 = tmp;
+            tmp = tmp->next;
+        }
+    }
+}
+
+link_list_t* reverse_link_list(link_list_t* head)
+{
+    link_list_t* tmp = NULL, *nextNode = NULL;
+    while(head)
+    {
+        nextNode = head->next;
+        head->next = tmp;
+        tmp = head;
+        head = nextNode;
+    }
+    return tmp;
+}
+
 void print_link_list(link_list_t* head)
 {
 	printf("going to print list\n");
@@ -70,7 +119,7 @@ int main()
 	int i;
 	while(1)
 	{
-		printf("Enter 1 to add, 2 to display, 3 to Exit, 4 to free\n");
+		printf("Enter 1 to add, 2 to display, 3 to Exit, 4 to free, 5 to reverse\n");
 		scanf("%d",&i);
 		switch(i)
 		{
@@ -107,6 +156,17 @@ int main()
 					//		free(nPtr);
 
 			}
+            case 5:
+            {
+                headp = reverse_link_list(headp);
+            }
+            case 6:
+            {
+                int r;
+                printf("Enter a n to delete nth node");
+                scanf("%d", &r);
+                remove_nth_node(headp, r);
+            }
 		}
 		i = 0;
 	}

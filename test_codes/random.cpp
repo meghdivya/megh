@@ -1,10 +1,14 @@
-
 #include<iostream>
 #include<cstdlib>
+#include "random.hpp"
+
 using namespace std;
 extern const int bss[];
 int main()
 {
+    get_random(__LINE__);get_random(__LINE__);
+    get_random(__LINE__);
+
     int arr[7] = {0};
     int i=1000;
     while(i--)

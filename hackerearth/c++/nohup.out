@@ -1,0 +1,65 @@
+receipt.cpp: In constructor ‘MedicalProduct::MedicalProduct(std::string, float, int)’:
+receipt.cpp:7:12: error: ‘std::string Product::name’ is private
+     string name;
+            ^
+receipt.cpp:45:9: error: within this context
+         name = ip_name;
+         ^
+receipt.cpp:8:11: error: ‘float Product::price’ is private
+     float price;
+           ^
+receipt.cpp:46:9: error: within this context
+         price = ip_price;
+         ^
+receipt.cpp:9:9: error: ‘int Product::quantity’ is private
+     int quantity;
+         ^
+receipt.cpp:47:9: error: within this context
+         quantity = ip_quantity;
+         ^
+receipt.cpp:10:11: error: ‘float Product::sales_tax_percentage’ is private
+     float sales_tax_percentage;
+           ^
+receipt.cpp:48:9: error: within this context
+         sales_tax_percentage = 0.0; 
+         ^
+receipt.cpp: In constructor ‘NonMedicalProduct::NonMedicalProduct(std::string, float, int)’:
+receipt.cpp:7:12: error: ‘std::string Product::name’ is private
+     string name;
+            ^
+receipt.cpp:58:9: error: within this context
+         name = ip_name;
+         ^
+receipt.cpp:8:11: error: ‘float Product::price’ is private
+     float price;
+           ^
+receipt.cpp:59:9: error: within this context
+         price = ip_price;
+         ^
+receipt.cpp:9:9: error: ‘int Product::quantity’ is private
+     int quantity;
+         ^
+receipt.cpp:60:9: error: within this context
+         quantity = ip_quantity;
+         ^
+receipt.cpp:10:11: error: ‘float Product::sales_tax_percentage’ is private
+     float sales_tax_percentage;
+           ^
+receipt.cpp:61:9: error: within this context
+         sales_tax_percentage = 20.0; 
+         ^
+receipt.cpp: In function ‘int main()’:
+receipt.cpp:96:10: error: no matching function for call to ‘Bill::Bill()’
+     Bill bill1;
+          ^
+receipt.cpp:96:10: note: candidates are:
+receipt.cpp:72:5: note: Bill::Bill(float, float)
+     Bill(float total, float sales_tax_total)
+     ^
+receipt.cpp:72:5: note:   candidate expects 2 arguments, 0 provided
+receipt.cpp:66:7: note: Bill::Bill(const Bill&)
+ class Bill
+       ^
+receipt.cpp:66:7: note:   candidate expects 1 argument, 0 provided
+receipt.cpp:66:7: note: Bill::Bill(Bill&&)
+receipt.cpp:66:7: note:   candidate expects 1 argument, 0 provided
