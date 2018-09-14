@@ -43,6 +43,7 @@ int calculate_strength(vector<int> v)
 
 long calculate_all_partition(vector<int>v, int i, int j, int k)
 {
+#if 0
     long sum = 0;
 //    vector<int>v1;
     int script = k;
@@ -52,13 +53,15 @@ long calculate_all_partition(vector<int>v, int i, int j, int k)
         vector<int>::const_iterator last = v.begin() + j;
         vector<int> v1(first, last);
 
-    }
 
+    }
+#endif
 
 }
 
 void partition(vector<int> v,int k)
 {
+#if 0
     int i = 1;
     for(;i<=k; ++i)
     {
@@ -71,6 +74,7 @@ void partition(vector<int> v,int k)
 
         }
     }
+#endif
 }
 
 int main()
@@ -91,6 +95,7 @@ int main()
             cin>>array_e;
             v.push_back(array_e);
         }
+        cout<<calculate_strength(v)<<endl;
     }
 
 }
