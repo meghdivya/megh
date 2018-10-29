@@ -38,5 +38,12 @@ int main()
     if(it!=test2.end())
         printf("found");
 
+    cout<<test2.size()<<endl;
+    cout<<"*****************\n"<<endl;
+    auto test_moved = move(test2);
+    cout<<test2.size()<<endl;
+    cout<<"*****************\n"<<endl;
+    cout<<test_moved.size()<<endl;
+
     return 0;
 }

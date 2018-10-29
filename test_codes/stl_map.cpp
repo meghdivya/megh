@@ -1,5 +1,6 @@
 #include<iostream>
 #include<map>
+#include<unordered_map>
 using namespace std;
 
 int main()
@@ -18,4 +19,14 @@ int main()
             cout<<it->first<<","<<it->second<<","<<(it->first).size()<<endl;
         else
             cout<<"not found"<<endl;
+
+   unordered_map<string, int>m2;
+   for(int i =0;i <10; i++)
+        m2.insert(pair<string, int> ("a"+to_string(i),i));
+   m2["hello"] = 111;
+   for(const auto &v: m2)
+   {
+            cout<<v.first<<","<<v.second<<","<<(v.first).size()<<endl;
+   }
+
 }

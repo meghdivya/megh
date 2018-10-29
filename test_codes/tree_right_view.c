@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#define COUNT 10
 struct Node
 {
     int data;
@@ -13,9 +14,46 @@ struct Node *newNode(int item)
     temp->left = temp->right = NULL;
     return temp;
 }
+
+struct Node* arr[20] = {0};
+
+// Function to print binary tree in 2D
+// It does reverse inorder traversal
+void print2DUtil(Node *root, int space)
+{
+    // Base case
+    if (root == NULL)
+        return;
+ 
+    // Increase distance between levels
+    space += COUNT;
+ 
+    // Process right child first
+    print2DUtil(root->right, space);
+ 
+    // Print current node after space
+    // count
+    printf("\n");
+    for (int i = COUNT; i < space; i++)
+        printf(" ");
+    printf("%d\n",root->data);
+ 
+    // Process left child
+    print2DUtil(root->left, space);
+    //root->print2DUtil(root->left, space);
+}
+
+// Wrapper over print2DUtil()
+void print2D(Node* root)
+{
+   //root = m_root;
+   // Pass initial space count as 0
+   print2DUtil(root, 0);
+}
 // Recursive function to print right view of a binary tree.
 void rightViewUtil(struct Node *root, int level, int *max_level)
 {
+    printf("Entry in rightViewUtil\n");
     // Base Case
     if (root==NULL)  return;
     // If this is the last Node of its level
@@ -28,6 +66,16 @@ void rightViewUtil(struct Node *root, int level, int *max_level)
     rightViewUtil(root->right, level+1, max_level);
     rightViewUtil(root->left, level+1, max_level);
 }
+
+void rightView_another(struct Node* root, int level)
+{
+    printf("Entry in rightViewAnother\n");
+    if(root==NULL) return;
+    arr[level] = root;
+    rightView_another(root->left, level+1);
+    rightView_another(root->right, level+1);
+}
+
 // A wrapper over rightViewUtil()
 void rightView(struct Node *root)
 {
@@ -45,6 +93,16 @@ int main()
     root->right->left = newNode(6);
     root->right->right = newNode(7);
     root->right->left->right = newNode(8);
+    print2D(root);
     rightView(root);
+    int level = 0;
+    rightView_another(root, level);
+    for(int i=0; i<20; i++)
+    {
+        if(arr[i]!=NULL)
+        {
+        printf("%d\n",arr[i]->data);
+        }
+    }
     return 0;
 }
