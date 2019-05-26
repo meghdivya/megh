@@ -1,5 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<iostream>
+#include<stack>
+using namespace std;
 #define COUNT 10
 struct Node
 {
@@ -53,7 +56,7 @@ void print2D(Node* root)
 // Recursive function to print right view of a binary tree.
 void rightViewUtil(struct Node *root, int level, int *max_level)
 {
-    printf("Entry in rightViewUtil\n");
+    //printf("Entry in rightViewUtil\n");
     // Base Case
     if (root==NULL)  return;
     // If this is the last Node of its level
@@ -69,7 +72,6 @@ void rightViewUtil(struct Node *root, int level, int *max_level)
 
 void rightView_another(struct Node* root, int level)
 {
-    printf("Entry in rightViewAnother\n");
     if(root==NULL) return;
     arr[level] = root;
     rightView_another(root->left, level+1);
@@ -81,6 +83,71 @@ void rightView(struct Node *root)
 {
     int max_level = 0;
     rightViewUtil(root, 1, &max_level);
+}
+
+int max(int, int);
+
+int diameter(Node* root, int* h)
+{
+	int lh =0, rh =0;
+	int ld =0, rd =0;
+	if(!root)
+	{
+		*h = 0;
+		return 0;
+	}
+	
+	ld = diameter(root->left, &lh);
+	rd = diameter(root->right, &rh);
+	*h = max(lh, rh) + 1;
+	return max(max(ld, rd), lh+rh+1);
+		
+}
+int max(int a, int b)
+{
+	return a>b?a:b;
+}
+stack<Node*>s1;
+stack<Node*>s2;
+
+void print_zig_zag(Node* root)
+{
+	print2D(root);
+	cout<<"inside zigzag "<<endl;
+	s1.push(root);
+	cout<<root->data<<endl;
+	while((!s1.empty()) || (!s2.empty()))
+	{
+		while(!s1.empty())
+		{
+			Node* tmp = s1.top();
+			s1.pop();
+			cout<<"s1: "<<tmp->data<<" ,";
+			if(tmp->right)
+			{
+				s2.push(tmp->right);
+			}
+			if(tmp->left)
+			{
+				s2.push(tmp->left);
+			}
+		}
+
+		while(!s2.empty())
+		{
+			Node* tmp = s2.top();
+			s2.pop();
+			cout<<"s2: "<<tmp->data<<" ,";
+			if(tmp->left)
+			{
+				s1.push(tmp->left);
+			}
+			if(tmp->right)
+			{
+				s1.push(tmp->right);
+			}
+		}
+	}
 }
 // Driver Program to test above functions
 int main()
@@ -104,5 +171,10 @@ int main()
         printf("%d\n",arr[i]->data);
         }
     }
+    printf("*************************\n");
+
+    int h;
+    printf("diameter = %d\n",diameter(root, &h));
+    print_zig_zag(root);
     return 0;
 }
