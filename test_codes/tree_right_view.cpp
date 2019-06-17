@@ -149,6 +149,33 @@ void print_zig_zag(Node* root)
 		}
 	}
 }
+void pre_order(Node* root)
+{
+	if(!root)
+		return;
+	printf("%d ,", root->data);
+	pre_order(root->left);
+	pre_order(root->right);
+}
+
+void post_order(Node* root)
+{
+	if(!root)
+		return;
+	pre_order(root->left);
+	pre_order(root->right);
+	printf("%d ,", root->data);
+}
+
+void in_order(Node* root)
+{
+	if(!root)
+		return;
+	in_order(root->left);
+	printf("%d ,", root->data);
+	in_order(root->right);
+}
+
 // Driver Program to test above functions
 int main()
 {
@@ -176,5 +203,13 @@ int main()
     int h;
     printf("diameter = %d\n",diameter(root, &h));
     print_zig_zag(root);
+    print2D(root);
+
+    printf("PRE order \n"); 
+    pre_order(root);
+    printf("\nPOST order \n"); 
+    post_order(root);
+    printf("\nIN order \n"); 
+    in_order(root);
     return 0;
 }
